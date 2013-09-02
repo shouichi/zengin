@@ -143,3 +143,20 @@ describe Zengin::RowFormatter do
     end
   end
 end
+
+describe Zengin::FooterFormatter do
+  let(:deposits) { [{ amount: 100 }, { amount: 200 }] }
+  let(:formatter) { Zengin::FooterFormatter.new(deposits) }
+
+  describe '#format' do
+    subject { formatter.format }
+
+    it 'has number of deposits' do
+      expect(subject[0][1]). to eq(deposits.length)
+    end
+
+    it 'has sum of amount' do
+      expect(subject[0][2]).to eq(deposits.reduce(0) { |a, d| a + d[:amount] })
+    end
+  end
+end

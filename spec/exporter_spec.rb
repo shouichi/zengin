@@ -40,8 +40,8 @@ describe Zengin::Exporter do
   describe '#rows' do
     subject { exporter.rows }
 
-    it 'contains 1 + N(deposits) rows' do
-      expect(subject).to have(3).items
+    it 'contains 1 header + N(deposits) rows + 2 footers' do
+      expect(subject).to have(1 + deposits.length + 2).items
     end
   end
 end

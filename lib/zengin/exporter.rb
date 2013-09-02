@@ -15,7 +15,7 @@ module Zengin
     def rows
       deposits.reduce([build_header]) do |accumulator, deposit|
         accumulator << build_row(deposit)
-      end
+      end + build_footer
     end
 
     def export(path)
@@ -35,6 +35,10 @@ module Zengin
         client_account_number: client_account_number,
         deposit_at: deposit_at,
       ).format
+    end
+
+    def build_footer
+      Zengin::FooterFormatter.new(deposits).format
     end
 
     def build_row(deposit)
