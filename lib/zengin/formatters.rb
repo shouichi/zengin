@@ -31,4 +31,25 @@ module Zengin
       [2, deposit[:bank_code], nil, deposit[:branch_code], nil, nil, deposit[:account_type], deposit[:account_number], deposit[:account_name], deposit[:amount], 0, nil]
     end
   end
+
+  class FooterFormatter
+    attr_accessor :deposits
+
+    def initialize(deposits)
+      self.deposits = deposits
+    end
+
+    def format
+      [[8, deposits.length, sum, nil, nil, nil, nil, nil, nil, nil, nil, nil],
+        [9, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil]]
+    end
+
+    private
+
+    def sum
+      deposits.reduce(0) do |accumulator, deposit|
+        accumulator + deposit[:amount]
+      end
+    end
+  end
 end
