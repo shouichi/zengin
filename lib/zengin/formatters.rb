@@ -28,7 +28,7 @@ module Zengin
     end
 
     def format
-      [2, deposit[:bank_code], nil, deposit[:branch_code], nil, nil, deposit[:account_type], deposit[:account_number], deposit[:account_name], deposit[:amount], 0, nil]
+      [2, deposit[:bank_code], nil, deposit[:branch_code], nil, nil, deposit[:account_type], deposit[:account_number], deposit[:account_name][0, 30], deposit[:amount], 0, nil]
     end
   end
 
