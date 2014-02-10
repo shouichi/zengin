@@ -28,7 +28,24 @@ module Zengin
     end
 
     def format
-      [2, deposit[:bank_code], nil, deposit[:branch_code], nil, nil, deposit[:account_type], deposit[:account_number], deposit[:account_name][0, 30], deposit[:amount], 0, nil]
+      [
+        2,
+        deposit[:bank_code],
+        nil,
+        deposit[:branch_code],
+        nil,
+        nil,
+        deposit[:account_type],
+        deposit[:account_number],
+        convert_to_shift_jis(deposit[:account_name][0, 30]),
+        deposit[:amount],
+        0,
+        nil
+      ]
+    end
+
+    def convert_to_shift_jis(value)
+      value.encode('Shift_JIS', invalid: :replace, undef: :replace, replace: '?')
     end
   end
 
